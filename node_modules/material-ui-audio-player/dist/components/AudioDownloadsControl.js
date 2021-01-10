@@ -1,0 +1,98 @@
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AudioDownloadsControl = void 0;
+var React = __importStar(require("react"));
+var Paper_1 = __importDefault(require("@material-ui/core/Paper"));
+var useMediaQuery_1 = __importDefault(require("@material-ui/core/useMediaQuery"));
+var Grid_1 = __importDefault(require("@material-ui/core/Grid"));
+var Typography_1 = __importDefault(require("@material-ui/core/Typography"));
+var useTheme_1 = __importDefault(require("@material-ui/core/styles/useTheme"));
+var makeStyles_1 = __importDefault(require("@material-ui/core/styles/makeStyles"));
+var CloudDownload_1 = __importDefault(require("@material-ui/icons/CloudDownload"));
+var classnames_1 = __importDefault(require("classnames"));
+var useComponentStyles = makeStyles_1.default({
+    commonContainer: {
+        flex: '0 0 auto',
+        '&:hover': {
+            cursor: 'pointer',
+        },
+    },
+    downloadLink: function (props) { return ({
+        color: props.playerColors.active,
+        textDecoration: 'none',
+        '&:hover': {
+            color: props.playerColors.hover,
+        },
+        '&:focus': {
+            color: props.playerColors.active,
+        },
+        '&:active': {
+            color: props.playerColors.active,
+        },
+    }); },
+    downloadsContainer: {
+        position: 'absolute',
+        width: 'auto',
+        top: '85%',
+    },
+    downloadsItemContainer: {
+        padding: '8px 14px',
+    },
+    cloudDownloadIconContainer: {
+        position: 'relative',
+    },
+    cloudDownloadIcon: function (props) { return ({
+        color: props.playerColors.active,
+        '&:hover': {
+            color: props.playerColors.hover,
+        },
+    }); },
+});
+var AudioDownloadsControl = function (_a) {
+    var src = _a.src, playerColors = _a.playerColors, _b = _a.classNames, classNames = _b === void 0 ? {} : _b;
+    var classes = useComponentStyles({ playerColors: playerColors });
+    var _c = React.useState(false), downloadsDropdownOpened = _c[0], openDownloadsDropdown = _c[1];
+    var theme = useTheme_1.default();
+    var toggleDownloadsDropdown = function (value) { return function () {
+        openDownloadsDropdown(value);
+    }; };
+    var isMobile = useMediaQuery_1.default(theme.breakpoints.down('sm'));
+    return Array.isArray(src) ? (isMobile ? (React.createElement(Grid_1.default, { item: true, className: classes.commonContainer },
+        React.createElement("a", { className: classes.downloadLink, href: src[0], download: true },
+            React.createElement(CloudDownload_1.default, { fontSize: "large", className: classNames.downloadIcon })))) : (React.createElement(Grid_1.default, { item: true, className: classnames_1.default(classes.commonContainer, classes.cloudDownloadIconContainer), onMouseEnter: toggleDownloadsDropdown(true), onMouseLeave: toggleDownloadsDropdown(false) },
+        React.createElement(CloudDownload_1.default, { fontSize: "large", className: classnames_1.default(classes.cloudDownloadIcon, classNames.downloadsIcon) }),
+        downloadsDropdownOpened && (React.createElement(Grid_1.default, { container: true, direction: "column", alignItems: "center", justify: "center", component: Paper_1.default, className: classes.downloadsContainer }, src.map(function (srcLink, index) {
+            return (React.createElement(Grid_1.default, { key: index, item: true, className: classnames_1.default(classes.downloadsItemContainer, classNames.downloadsContainer) },
+                React.createElement("a", { className: classnames_1.default(classes.downloadLink, classNames.downloadsItemLink), href: srcLink, download: true },
+                    React.createElement(Typography_1.default, { color: "textPrimary", className: classNames.downloadsItemText }, srcLink
+                        .substring(srcLink.lastIndexOf('.') + 1)
+                        .toUpperCase()))));
+        })))))) : (React.createElement(Grid_1.default, { item: true, className: classes.commonContainer },
+        React.createElement("a", { className: classes.downloadLink, href: src, download: true },
+            React.createElement(CloudDownload_1.default, { fontSize: "large", className: classNames.downloadIcon }))));
+};
+exports.AudioDownloadsControl = AudioDownloadsControl;
+exports.default = React.memo(exports.AudioDownloadsControl);
+//# sourceMappingURL=AudioDownloadsControl.js.map

@@ -22,7 +22,7 @@ const NewCallRecord = ({
             boxShadow: "1px 1px rgba(0,0,0,0.5)",
             // backgroundColor: { ongoingCallColor }, // changing color, ongoing call clicked
           }}
-          onClick={() => getConvdata(conversationID, centerName, callerId)}
+          onClick={getConvdata(conversationID, centerName, callerId)}
           class="nav-link newcall-btn "
           data-toggle="pill"
           href="#"

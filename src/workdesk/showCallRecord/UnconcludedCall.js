@@ -1,11 +1,11 @@
 import React from "react";
 
 const UnconcludedCall = (
-  conversationID,
+{conversationID,
   centerName,
   callerId,
   initialTime,
-  getConvdata
+  getConvdata}
 ) => {
   return (
     <>
@@ -15,7 +15,7 @@ const UnconcludedCall = (
           style={{
             boxShadow: "1px 1px rgba(0,0,0,0.5)",
           }}
-          onClick={() => getConvdata(conversationID, centerName, callerId)}
+          onClick={ getConvdata(conversationID, centerName, callerId)}
           class="nav-link"
           data-toggle="pill"
           href="#"
