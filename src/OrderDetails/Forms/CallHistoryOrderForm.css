@@ -1,0 +1,9 @@
+.orderdetails {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  font-weight: 500;
+}
+
+input {
+  padding: 2px 0;
+  outline: none;
+}
